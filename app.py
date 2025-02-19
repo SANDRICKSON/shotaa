@@ -13,7 +13,7 @@ from forms import RegisterForm, MessageForm, LoginForm, UpdateForm, ForgotPasswo
 s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 
 
-@app.route("/settings", methods=["GET", "POST"])
+@app.route("/settings", methods=["GET", "POST"]) 
 @login_required
 def settings():
     form = FormUpdateForm(obj=current_user)  # ფორმის შევსება მიმდინარე მომხმარებლის მონაცემებით
@@ -22,23 +22,19 @@ def settings():
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.birthday = form.birthday.data
-        
-            
-        current_user.password=form.password.data,
-        
-        current_user.country=form.country.data,
-        current_user.gender=form.gender.data,
-            
+        current_user.country = form.country.data  # ✅ სწორად განახლება
+        current_user.gender = form.gender.data  # ✅ სწორად განახლება
 
         # თუ მომხმარებელმა პაროლის შეცვლა გადაწყვიტა
         if form.password.data:
-            current_user.password = generate_password_hash(form.password.data)
+            current_user.password = generate_password_hash(form.password.data)  # ✅ სწორად განახლება
 
         db.session.commit()
         flash("მონაცემები წარმატებით განახლდა!", "success")
         return redirect(url_for("profile"))
 
     return render_template("settings.html", form=form, title="პარამეტრები - ვეფხისტყაოსანი")
+
 
 # 📌 პაროლის აღდგენის როუტი
 @app.route('/forgot_password', methods=['GET', 'POST'])
