@@ -8,26 +8,31 @@
         <form method="POST">
             {{ form.hidden_tag() }}
 
+            <!-- მომხმარებლის სახელი -->
             <div class="mb-3">
                 {{ form.username.label(class="form-label") }}
                 {{ form.username(class="form-control") }}
             </div>
 
+            <!-- ელ-ფოსტა -->
             <div class="mb-3">
                 {{ form.email.label(class="form-label") }}
                 {{ form.email(class="form-control") }}
             </div>
 
+            <!-- დაბადების თარიღი -->
             <div class="mb-3">
                 {{ form.birthday.label(class="form-label") }}
                 {{ form.birthday(class="form-control") }}
             </div>
 
+            <!-- ქვეყანა -->
             <div class="mb-3">
                 {{ form.country.label(class="form-label") }}
                 {{ form.country(class="form-select") }}
             </div>
 
+            <!-- სქესი -->
             <div class="mb-3">
                 {{ form.gender.label(class="form-label") }}
                 <div>
@@ -44,11 +49,13 @@
 
             <h5 class="text-danger">🔐 პაროლის შეცვლა (არ არის სავალდებულო)</h5>
 
+            <!-- ახალი პაროლი -->
             <div class="mb-3">
                 {{ form.password.label(class="form-label") }}
                 {{ form.password(class="form-control") }}
             </div>
 
+            <!-- გაიმეორეთ პაროლი -->
             <div class="mb-3">
                 {{ form.confirm_password.label(class="form-label") }}
                 {{ form.confirm_password(class="form-control") }}
