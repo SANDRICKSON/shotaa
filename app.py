@@ -6,10 +6,39 @@ from itsdangerous import URLSafeTimedSerializer
 from flask_mail import Message
 from extensions import app, mail
 from models import User
-from forms import RegisterForm, MessageForm, LoginForm, UpdateForm, ForgotPasswordForm,ResetPasswordForm
+from forms import RegisterForm, MessageForm, LoginForm, UpdateForm, ForgotPasswordForm,ResetPasswordForm, FormUpdateForm
+
 
 # 📌 Email ვერიფიკაციის ტოკენის გენერაცია
 s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+
+
+@app.route("/settings", methods=["GET", "POST"])
+@login_required
+def settings():
+    form = FormUpdateForm(obj=current_user)  # ფორმის შევსება მიმდინარე მომხმარებლის მონაცემებით
+
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.birthday = form.birthday.data
+        
+            
+        current_user.password=form.password.data,
+        
+        current_user.country=form.country.data,
+        current_user.gender=form.gender.data,
+            
+
+        # თუ მომხმარებელმა პაროლის შეცვლა გადაწყვიტა
+        if form.password.data:
+            current_user.password = generate_password_hash(form.password.data)
+
+        db.session.commit()
+        flash("მონაცემები წარმატებით განახლდა!", "success")
+        return redirect(url_for("profile"))
+
+    return render_template("settings.html", form=form, title="პარამეტრები - ვეფხისტყაოსანი")
 
 # 📌 პაროლის აღდგენის როუტი
 @app.route('/forgot_password', methods=['GET', 'POST'])
