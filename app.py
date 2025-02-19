@@ -4,7 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadTimeSignature
 from itsdangerous import URLSafeTimedSerializer
 from flask_mail import Message
-from extensions import app, mail
+from extensions import app, mail,db
 from models import User
 from forms import RegisterForm, MessageForm, LoginForm, UpdateForm, ForgotPasswordForm,ResetPasswordForm, FormUpdateForm
 
