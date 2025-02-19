@@ -34,14 +34,31 @@
                     {% endif %}
                 </p>
             </div>
+            <div class="text-center mt-4">
+                <a href="{{ url_for('settings') }}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> პროფილის რედაქტირება
+                </a>
+            </div>
         </div>
     </div>
     <style>
-        .list-group-item{
+        .list-group-item {
             font-family: "BPG Classic Medium", sans-serif;
         }
-        .good{
+        .good {
             font-family: "BPG Classic Medium", sans-serif;
+        }
+        .btn-primary {
+            font-family: "BPG Classic Medium", sans-serif;
+            background-color: #3498db;
+            border-color: #2980b9;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
         }
     </style>
 {% endblock %}
