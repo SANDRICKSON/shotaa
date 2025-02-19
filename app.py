@@ -85,7 +85,9 @@ def reset_password(token):
 def unauthorized(error):
     return render_template('401.html', title="არაავტორიზირებული მომხმარებელი - ვეფხისტყაოსანი"), 401
 
-
+@app.errorhandler(500)
+def unauthorized(error):
+    return render_template('500.html', title="სერვერის შეცდომა - ვეფხისტყაოსანი"), 500
 
 # 502 - Bad Gateway
 @app.errorhandler(502)
