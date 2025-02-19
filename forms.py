@@ -1,3 +1,4 @@
+from wtforms.validators import Optional
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, DateField, SelectField, RadioField, EmailField,TextAreaField
 from wtforms.validators import DataRequired, Length, EqualTo, Email
@@ -47,3 +48,30 @@ class ResetPasswordForm(FlaskForm):
     repeat_password = PasswordField("გაიმეორეთ პაროლი", validators=[DataRequired(), EqualTo("password", message="პაროლები არ ემთხვევა")])
 
     submit = SubmitField('პაროლის განახლება')
+
+
+class FormUpdateForm(FlaskForm):
+    username = StringField("მომხმარებლის სახელი", validators=[DataRequired()])
+    
+    country = SelectField("აირჩიეთ ქვეყანა", choices=[
+        ("Georgia", "საქართველო/Georgia"), 
+        ("United States", "აშშ/United States"), 
+        ("France", "საფრანგეთი/France"), 
+        ("Germany", "გერმანია/Germany"), 
+        ("Italy", "იტალია/Italy"), 
+        ("England", "ინგლისი/England")
+    ], validators=[Optional()])
+    
+    gender = RadioField("აირჩიეთ სქესი", choices=[
+         ("male", "კაცი"), 
+         ("female", "ქალი"), 
+         ("other", "არ არის მითითებული")
+    ], validators=[Optional()])
+    
+    email = StringField("ელ-ფოსტა", validators=[DataRequired(), Email()])
+    birthday = DateField("დაბადების თარიღი", format="%Y-%m-%d", validators=[Optional()])
+    
+    password = PasswordField("ახალი პაროლი", validators=[Optional()])
+    confirm_password = PasswordField("გაიმეორეთ პაროლი", validators=[Optional(), EqualTo('password', message="პაროლები არ ემთხვევა")])
+    
+    submit = SubmitField("განახლება")
